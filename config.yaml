@@ -1,0 +1,28 @@
+# Example configuration. These mirror the dataclass defaults in the code so you
+# have a single place to see and tweak the knobs. (run_backtest.py exposes the
+# common ones as CLI flags; deeper tuning can be done in code.)
+
+data:
+  symbol: "EURUSD=X"     # yfinance symbol (e.g. GBPUSD=X, USDJPY=X)
+  interval: "1h"         # 1h is a good balance; 1d for slower, 15m for faster
+  period: "2y"           # how much history to pull
+
+strategy:
+  ema_fast: 20
+  ema_slow: 50
+  rsi_period: 14
+  rsi_buy_dip: 45        # in an uptrend, buy when RSI dips to/below this then turns up
+  rsi_sell_rally: 55     # in a downtrend, sell when RSI rallies to/above this then turns down
+  adx_period: 14
+  adx_min: 20            # only trade when trend strength (ADX) exceeds this
+  atr_period: 14
+  atr_stop_mult: 2.0     # stop distance = this * ATR
+  reward_risk: 1.8       # take-profit distance = reward_risk * stop distance
+
+risk:
+  risk_per_trade: 0.01   # risk 1% of equity per trade (keep this small!)
+
+costs:
+  spread_pips: 1.0       # realistic EURUSD spread
+  slippage_pips: 0.5     # adverse slippage per fill
+  commission_per_trade: 0.0
