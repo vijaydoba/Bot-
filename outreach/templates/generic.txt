@@ -1,0 +1,12 @@
+Subject: Quick question about {business_name}'s customer support
+
+Hi {contact_name},
+
+I came across {business_name} and noticed your website doesn't have a live chat.
+
+I built an AI tool that answers customer questions 24/7 automatically — things like pricing, hours, availability, and FAQs. It installs on your website in 5 minutes.
+
+Would you be open to a free 14-day trial? No credit card needed.
+
+Best,
+{sender_name}

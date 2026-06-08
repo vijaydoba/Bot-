@@ -1,0 +1,21 @@
+Subject: Quick question about {business_name}'s patient experience
+
+Hi {contact_name},
+
+I was looking up dentists in {city} and came across {business_name} — great reviews!
+
+I noticed your website doesn't have a live chat. A lot of patients hesitate to call during busy hours, so they just leave without booking.
+
+I built an AI assistant that:
+✅ Answers patient questions 24/7 (hours, pricing, insurance)
+✅ Helps patients book appointments instantly
+✅ Works on your website in under 10 minutes
+
+Would you be open to a free 14-day trial? No credit card needed.
+
+Takes 5 minutes to set up — I'll handle everything.
+
+Best,
+{sender_name}
+
+P.S. Happy to show you a 2-minute demo if that's easier — just reply "demo" and I'll send a link.

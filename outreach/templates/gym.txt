@@ -1,0 +1,19 @@
+Subject: Are you losing members to unanswered questions?
+
+Hi {contact_name},
+
+I found {business_name} while looking for gyms in {city} — awesome place!
+
+Here's something most gym owners don't realize: 60% of people who visit your website leave without contacting you because they can't quickly find answers to basic questions like pricing, class schedules, or trial offers.
+
+I built an AI chat widget that:
+✅ Answers membership questions instantly (price, contract, amenities)
+✅ Shows class schedules and available slots
+✅ Captures leads even at 2am when you're closed
+
+Would you try it free for 14 days? Setup takes less than 10 minutes.
+
+No obligations, no credit card.
+
+Best,
+{sender_name}
