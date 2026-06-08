@@ -205,7 +205,7 @@
   document.body.appendChild(box);
 
   // Load bot info
-  fetch(`${API_URL}/chatbots/${CHATBOT_ID}`)
+  fetch(`${API_URL}/chatbots/public/${CHATBOT_ID}`)
     .then(r => r.json())
     .then(bot => {
       document.getElementById("ai-chat-title").textContent = bot.business_name || "AI Assistant";

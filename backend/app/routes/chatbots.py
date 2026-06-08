@@ -50,6 +50,19 @@ def create_chatbot(req: ChatbotCreate, user=Depends(get_current_user)):
     return {"id": bot_id, "message": "Chatbot created successfully"}
 
 
+@router.get("/public/{bot_id}")
+def get_chatbot_public(bot_id: int):
+    """Public endpoint used by the chat widget to load bot name, color and welcome message."""
+    with get_conn() as conn:
+        row = conn.execute(
+            "SELECT id, business_name, widget_color, welcome_message FROM chatbots WHERE id=? AND is_active=1",
+            (bot_id,)
+        ).fetchone()
+    if not row:
+        raise HTTPException(status_code=404, detail="Chatbot not found")
+    return dict(row)
+
+
 @router.get("/{bot_id}")
 def get_chatbot(bot_id: int, user=Depends(get_current_user)):
     with get_conn() as conn:
