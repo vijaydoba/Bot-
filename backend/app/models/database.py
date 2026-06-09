@@ -8,6 +8,9 @@ DB_PATH = os.getenv("DB_PATH", os.path.join(os.path.dirname(__file__), "../../db
 def init_db():
     with get_conn() as conn:
         conn.executescript("""
+            PRAGMA journal_mode=WAL;
+        """)
+        conn.executescript("""
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
@@ -26,6 +29,7 @@ def init_db():
                 system_prompt TEXT,
                 widget_color TEXT DEFAULT '#4F46E5',
                 welcome_message TEXT DEFAULT 'Hi! How can I help you today?',
+                provider TEXT DEFAULT 'groq',
                 is_active INTEGER DEFAULT 1,
                 created_at TEXT DEFAULT (datetime('now')),
                 FOREIGN KEY (user_id) REFERENCES users(id)
@@ -80,6 +84,11 @@ def init_db():
                 FOREIGN KEY (lead_id) REFERENCES leads(id)
             );
         """)
+        # Safe migrations for existing databases
+        try:
+            conn.execute("ALTER TABLE chatbots ADD COLUMN provider TEXT DEFAULT 'groq'")
+        except Exception:
+            pass  # Column already exists
 
 
 @contextmanager

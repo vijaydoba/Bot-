@@ -13,6 +13,7 @@ class ChatbotCreate(BaseModel):
     system_prompt: Optional[str] = None
     widget_color: Optional[str] = "#4F46E5"
     welcome_message: Optional[str] = "Hi! How can I help you today?"
+    provider: Optional[str] = "groq"
 
 
 class ChatbotUpdate(BaseModel):
@@ -21,6 +22,7 @@ class ChatbotUpdate(BaseModel):
     system_prompt: Optional[str] = None
     widget_color: Optional[str] = None
     welcome_message: Optional[str] = None
+    provider: Optional[str] = None
     is_active: Optional[bool] = None
 
 
@@ -43,8 +45,8 @@ def create_chatbot(req: ChatbotCreate, user=Depends(get_current_user)):
     prompt = req.system_prompt or default_prompt
     with get_conn() as conn:
         cur = conn.execute(
-            "INSERT INTO chatbots (user_id, business_name, business_type, system_prompt, widget_color, welcome_message) VALUES (?,?,?,?,?,?)",
-            (user["id"], req.business_name, req.business_type, prompt, req.widget_color, req.welcome_message),
+            "INSERT INTO chatbots (user_id, business_name, business_type, system_prompt, widget_color, welcome_message, provider) VALUES (?,?,?,?,?,?,?)",
+            (user["id"], req.business_name, req.business_type, prompt, req.widget_color, req.welcome_message, req.provider or "groq"),
         )
         bot_id = cur.lastrowid
     return {"id": bot_id, "message": "Chatbot created successfully"}
