@@ -7,6 +7,18 @@ from app.models.database import get_conn
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 
+TONE_WRAPPER = """
+COMMUNICATION RULES (always follow these, no exceptions):
+- Tone: Always polite, professional, and respectful. Never casual or overly enthusiastic.
+- Language: Use clear, simple sentences. Avoid slang, filler words, or excessive exclamation marks.
+- Greetings: A single warm greeting is enough. Do not repeat "Great!", "Sure!", "Absolutely!" before every reply.
+- Emojis: Do not use emojis unless the customer uses them first.
+- Length: Keep replies concise and to the point. No unnecessary padding.
+- Uncertainty: If you do not know something, politely say so and offer to connect them with a team member.
+- Closing: End replies naturally. Do not add "Have a great day!" to every single message.
+
+"""
+
 
 class ChatRequest(BaseModel):
     chatbot_id: int
@@ -67,11 +79,12 @@ def chat(req: ChatRequest):
     messages = _get_history(req.chatbot_id, session_id)
     messages.append({"role": "user", "content": req.message})
 
+    system_prompt = TONE_WRAPPER + (bot["system_prompt"] or "")
     provider = (bot["provider"] or "groq").lower()
     if provider == "anthropic":
-        reply = _reply_anthropic(bot["system_prompt"], messages)
+        reply = _reply_anthropic(system_prompt, messages)
     else:
-        reply = _reply_groq(bot["system_prompt"], messages)
+        reply = _reply_groq(system_prompt, messages)
 
     with get_conn() as conn:
         conn.execute(
